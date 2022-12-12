@@ -5,9 +5,9 @@ import uuid
 
 
 class Atm(object):
-    def __init__(self):
+    def __init__(self, host, port):
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='localhost'))
+            pika.ConnectionParameters(host=host, port=port))
 
         self.channel = self.connection.channel()
 

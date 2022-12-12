@@ -3,7 +3,6 @@ import decimal
 
 from kivy.app import App
 from kivy.uix.label import Label
-from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from decimal import *
@@ -16,7 +15,7 @@ getcontext().rounding = decimal.ROUND_DOWN
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')  # disable the right click red dot
 
 host = "localhost"
-port = 50051
+port = 5672
 atm = None
 authCode = None
 
@@ -46,7 +45,7 @@ class AuthPage(Screen):
             elif not pin.isdigit():
                 popupError("Pin must be a number")
             else:
-                atm = Atm()
+                atm = Atm(host, port)
                 authResponce = atm.auth(name, pin)
                 if authResponce != "False":
                     authCode = authResponce
